@@ -73,7 +73,8 @@ int matoi(char s[])
     return sign*n;
 }
 
-void mitoa(int N, char s[]) {
+void mitoa(int N, char s[])
+{
     int i, j, ch, sign;
 
     sign = (N < 0)? -1: +1;
