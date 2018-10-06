@@ -6,17 +6,20 @@
 #define MAXN    1000
 
 double newton(double x);
+void mitoa(int N, char s[]);
 int matoi(char s[]);
 int htoi(char s[]);
 
+
 int main(int argc, char *argv[])
 {
-    double x;
+    int x;
+    char s[20];
 
     x = matoi(argv[1]);
-    printf("%.0f\n", x);
-    printf("approx: %.15f\n", newton(x));
-    printf("actual: %.15f\n", sqrt(x));
+    printf("%d\n", x);
+    mitoa(x, s);
+    printf("%s\n", s);
     return 0;
 }
 
@@ -68,4 +71,24 @@ int matoi(char s[])
     for (n = 0; s[i] >= '0' && s[i] <= '9'; i++)
         n = n * 10 + (s[i] - '0');
     return sign*n;
+}
+
+void mitoa(int N, char s[]) {
+    int i, j, ch, sign;
+
+    sign = (N < 0)? -1: +1;
+    if (sign < 0)
+        N = -N;
+    i = 0;
+    while (N > 0) {
+        s[i++] = N % 10 + '0';
+        N /= 10;
+    }
+    if (sign < 0) s[i++] = '-';
+    s[i] = '\0';
+    for (j = 0; j < i/2; j++) {
+        ch = s[i-j-1];
+        s[i-j-1] = s[j];
+        s[j] = ch;
+    }
 }
