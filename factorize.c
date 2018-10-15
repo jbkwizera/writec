@@ -7,9 +7,9 @@ void evaluate(long N);
 
 int main(int argc, char *argv[])
 {
-    long N;
+    int N;
 
-    N = LONG_MAX;
+    N = atoi(argv[1]);
     evaluate(N);
     return 0;
 }

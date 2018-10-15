@@ -9,7 +9,9 @@ void sqweezo(char s[], char t[]);
 void catstr(char s[], char t[]);
 void mcopy(char s[], char t[]);
 int anych(char s[], char t[]);
-int matoi(char s[]);
+int readline(char s[], int lim);
+int lindx(char s[], char t[]);
+int rindx(char s[], char t[]);
 
 int main(int argc, char const *argv[])
 {
@@ -76,20 +78,37 @@ void mcopy(char s[], char t[])
     while ((t[i] = s[i]) != '\0')
         i++;
 }
-
-/* matoi: changes a string to an int */
-int matoi(char s[])
+int lindx(char s[], char t[])
 {
-    int i, n, sign;
+    int i, j, k;
+    for (i = 0; s[i] != '\0'; i++) {
+        for (j = i, k = 0; t[k] != '\0' && s[j] == t[k]; j++, k++)
+            ;
+        if (k > 0 && t[k] == '\0')
+            return i;
+    }
+    return -1;
+}
+int rindx(char s[], char t[])
+{
+    int i, j, k, m, n;
 
-    for (i = 0; s[i] == ' '; i++)
-        ;
-    sign = (s[i] == '-')? -1: +1;
+    m = strlen(s);
+    n = strlen(t);
+    for (i = m-n; i > -1; i--) {
+        for (j = i, k = 0; k < n && s[j] == t[k]; j++, k++)
+            ;
+        if (k == n) return i;
+    }
+    return -1;
+}
+int readline(char s[], int lim)
+{
+    int i, ch;
 
-    if (s[i] == '+' || s[i] == '-')
-        i++;
-
-    for (n = 0; isdigit(s[i]); i++)
-        n = n * 10 + (s[i] - '0');
-    return sign * n;
+    i = 0;
+    while (--lim && (ch = getchar()) != EOF && ch != '\n')
+        s[i++] = ch;
+    s[i] = '\0';
+    return i;
 }
