@@ -1,42 +1,38 @@
 #include <stdlib.h>
-#include <string.h>
 #include <stdio.h>
-#include <ctype.h>
 
-#define MAXN  1001             /* max length of my arrays */
+#define MAXL  1001             /* max length of my arrays */
 
-int main(int argc, char *argv[])
+int nexttoken(char s[]);
+
+int main(int argc, char const *argv[])
 {
-    char i, ch;
-    char s[MAXN];
-    double matof(char s[]);
-    int readline(char s[], int lim);
-    double sum;
+    char c, s[MAXL];
 
-    sum = 0.0;
-    while ((readline(s, MAXN) > 0)) {
-        sum += matof(s);
-        printf("%12.5f %13.5f\n", matof(s), sum);
+    while ((c = nexttoken(s)) != EOF) {
+        printf("%9s: %d\n", s, c);
     }
     return 0;
 }
 
-double matof(char s[]) {
-    int i, sign;
-    double v, p;
 
-    for (i = 0; isspace(s[i]); i++)
+
+#include <ctype.h>
+
+int nexttoken(char s[])
+{
+    int i, c;
+
+    while ((c = getchar()) != EOF && isspace(c))
         ;
-    sign = (s[i] == '-')? -1: +1;
-    if (s[i] == '-' || s[i] == '+')
-        i++;
-    for (v = 0.0; isdigit(s[i]); i++)
-        v  = 10.0 * v + (s[i] - '0');
+    if (c == EOF) return c;
 
-    if (s[i] == '.') i++;
-    for (p = 1.0; isdigit(s[i]); i++) {
-        v  = 10.0 * v + (s[i] - '0');
-        p *= 10.0;
-    }
-    return sign * v / p;
+    i = 0;
+    s[i++] = c;
+    while ((c = getchar()) != EOF && !isspace(c))
+        s[i++] = c;
+    s[i] = '\0';
+
+    if (c == EOF) return c;
+    return i;
 }

@@ -4,8 +4,9 @@
 #include<ctype.h>
 #include<math.h>
 
-#define MAXN    1000
+#define MAXD    1000
 
+/*
 double msqrt(double x);
 void mitoa(int n, char s[]);
 int matoi(char s[]);
@@ -13,15 +14,15 @@ double matof(char s[]);
 int mbtoi(char s[], int b);
 void mitob(int n, char s[], int b);
 
-
 int main(int argc, char *argv[])
 {
     int n, b;
-    char s[MAXN];
+    char s[MAXD];
     strcpy(s, argv[1]);
     printf("%d\n", matoi(s));
     return 0;
 }
+*/
 
 /* msqrt: sqrt using newton's method */
 double msqrt(double x)

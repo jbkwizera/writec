@@ -4,6 +4,7 @@
 
 #define MAXN  100             /* max length of my arrays */
 
+/*
 void sqweeze(char s[], char c);
 void sqweezo(char s[], char t[]);
 void catstr(char s[], char t[]);
@@ -15,14 +16,20 @@ int rindx(char s[], char t[]);
 
 int main(int argc, char const *argv[])
 {
-    char c, s[MAXN];
+    char c, t[MAXN], s[MAXN];
+    int found;
 
-    strcpy(s, argv[1]);
-    c = getchar();
-    sqweeze(s, c);
-    printf("%s\n", s);
+    found = 0;
+    strcpy(t, argv[1]);
+    while (readline(s, MAXN) > 0) {
+        if (lindx(s, t) >= 0) {
+            printf("%s\n", s);
+            found++;
+        }
+    }
+    return found;
 }
-
+*/
 /* sqweeze: remove all c chars in s. */
 void sqweeze(char s[], char c)
 {
@@ -69,7 +76,7 @@ int anych(char s[], char t[])
     return -1;
 }
 
-/* mcopy: copy s to t */
+/* mcopy: copy s to t. */
 void mcopy(char s[], char t[])
 {
     int i;
@@ -78,6 +85,8 @@ void mcopy(char s[], char t[])
     while ((t[i] = s[i]) != '\0')
         i++;
 }
+
+/* lindx: return first occurance of t in s from left. */
 int lindx(char s[], char t[])
 {
     int i, j, k;
@@ -89,6 +98,8 @@ int lindx(char s[], char t[])
     }
     return -1;
 }
+
+/* rindx: return first occurance of t in s from right. */
 int rindx(char s[], char t[])
 {
     int i, j, k, m, n;
@@ -102,6 +113,10 @@ int rindx(char s[], char t[])
     }
     return -1;
 }
+
+/* readline: read line on stdin with max length lim.
+ *           return length of the line.
+ */
 int readline(char s[], int lim)
 {
     int i, ch;
