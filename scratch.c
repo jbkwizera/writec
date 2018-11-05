@@ -1,38 +1,31 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <limits.h>
 
-#define MAXL  1001             /* max length of my arrays */
 
-int nexttoken(char s[]);
+#define MAXL  1001              /* max length of my arrays */
+#define max(x, y) (x > y? x: y) /* max macro */
+void printd(long);
 
 int main(int argc, char const *argv[])
 {
-    char c, s[MAXL];
+    int x;
+    x = INT_MIN;
+    printd(x);
+    printf("\n");
 
-    while ((c = nexttoken(s)) != EOF) {
-        printf("%9s: %d\n", s, c);
-    }
-    return 0;
+    char s[] = "could";
+    char t[] = "would";
+    printf("%d\n", max(s, t));
 }
 
-
-
-#include <ctype.h>
-
-int nexttoken(char s[])
+void printd(long n)
 {
-    int i, c;
-
-    while ((c = getchar()) != EOF && isspace(c))
-        ;
-    if (c == EOF) return c;
-
-    i = 0;
-    s[i++] = c;
-    while ((c = getchar()) != EOF && !isspace(c))
-        s[i++] = c;
-    s[i] = '\0';
-
-    if (c == EOF) return c;
-    return i;
+    if (n < 0) {
+        putchar('-');
+        n = -n;
+    }
+    if (n / 10)
+        printd(n / 10);
+    putchar(n % 10 + '0');
 }
