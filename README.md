@@ -1,2 +1,2 @@
 # writec
-tryin' to see
+C'ing is believing
